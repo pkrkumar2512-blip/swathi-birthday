@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Swathi! 🎂 Cinematic Friendship Journey 🤝</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Local background music file player -->
+    <audio id="bg-music" src="music.mp3" loop preload="auto" playsinline></audio>
+
+    <!-- Canvas background for stars and floating particles -->
+    <canvas id="canvas-bg"></canvas>
+    
+    <div class="ambient-glow"></div>
+    <div class="ambient-glow-2"></div>
+
+    <!-- Tap Anywhere audio banner overlay -->
+    <div id="audio-banner" class="tap-anywhere-banner">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+        <span>Tap anywhere to play birthday background music 🎵</span>
+    </div>
+
+    <!-- Top Fixed Header -->
+    <header>
+        <div class="logo" id="logo-branding">SWATHI.∞ 🎂</div>
+        <div class="nav-controls">
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <span class="progress-text">BDAY JOURNEY</span>
+                <div class="progress-bar-bg">
+                    <div id="progress-bar" class="progress-bar-fill"></div>
+                </div>
+                <span id="progress-percent" class="progress-text">0%</span>
+            </div>
+            <!-- Music Controller -->
+            <button id="music-toggle-btn" class="music-toggle" aria-label="Toggle music">
+                <svg id="icon-sound" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Side page indicators -->
+    <div class="scene-indicators" id="side-indicators"></div>
+
+    <!-- Main Container wrapping the scenes -->
+    <div class="scene-container">
+
+        <!-- SCENE 1 — CINEMATIC PHOTO HEART INTRO -->
+        <section id="scene-1" class="scene active">
+            <canvas id="canvas-intro-morph"></canvas>
+            <div class="intro-text-wrapper">
+                <div id="intro-text-line1" class="story-line">Every Year Has A Special Day...</div>
+                <div id="intro-text-line2" class="story-line story-line-bold">But Today Is My Favourite 🎂</div>
+                <div id="intro-text-line3" class="story-line" style="font-size: 1.5rem; margin-top: 15px; color: var(--text-muted);">Happy Birthday Swathi! • Let's Walk Down Memory Lane 🤝</div>
+                <div class="start-btn-container" id="intro-start-btn-box">
+                    <button class="btn-premium btn-gold" onclick="nextScene()">Unlock Birthday Journey 🎁</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCENE 2 — FRIENDSHIP TITLE SCREEN -->
+        <section id="scene-2" class="scene">
+            <div class="floating-polariods-bg" id="title-polaroids-container"></div>
+            <div class="title-card-wrapper">
+                <div class="glass-card">
+                    <h1 class="cinematic-title">Happy Birthday<br><span class="glow-gold">Swathi! 🎂</span></h1>
+                    <h2 class="section-subtitle" style="margin-bottom: 20px;">Celebrating 3+ Years of Legendary Friendship</h2>
+                    <div>
+                        <button class="btn-premium" onclick="nextScene()">Enter Memory Vault 🚀</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCENE 3 — FUN FRIENDSHIP GAME -->
+        <section id="scene-3" class="scene">
+            <div class="glass-card">
+                <h1 class="cinematic-title" style="font-size: 2.5rem;"><span class="glow-gold">Ultimate Slice of Cake 🎂</span></h1>
+                <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.6;">Who gets the absolute first, largest, and most delicious slice of birthday cake today? Let's decide! 🍰</p>
+                <div class="game-options" id="game-options-container">
+                    <button class="btn-premium" onclick="selectCorrectFriend(this)">Birthday Girl Swathi 👑</button>
+                    <button class="btn-premium" id="btn-evade">Me (obviously) 😂</button>
+                </div>
+                <div id="game-success" class="game-success-message">Exactly! 😂 Happy Birthday Swathi! 🎂</div>
+                <div id="game-continue-btn-box" style="display:none; margin-top:10px;">
+                    <button class="btn-premium btn-gold" onclick="nextScene()">Proceed Journey 🏆</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCENE 4 — FRIENDSHIP TIMELINE -->
+        <section id="scene-4" class="scene">
+            <h1 class="cinematic-title" style="font-size: 2.8rem;">Our <span class="glow-gold">Milestone Journey</span></h1>
+            <h2 class="section-subtitle" style="margin-bottom: 25px;">Scroll down to walk through the legendary years</h2>
+            
+            <div class="timeline-wrapper" id="timeline-container">
+                <div class="timeline-line"></div>
+                <!-- Timeline items populated in app.js -->
+            </div>
+            <div style="margin-top: 25px;">
+                <button class="btn-premium" onclick="nextScene()">Unlock Memory Gallery 📸</button>
+            </div>
+        </section>
+
+        <!-- SCENE 5 — MEMORY GALLERY -->
+        <section id="scene-5" class="scene">
+            <h1 class="cinematic-title" style="font-size: 2.8rem;">Memory <span class="glow-gold">Vault</span></h1>
+            <h2 class="section-subtitle" style="margin-bottom: 25px;">A collection of smiles, chaos, and adventures</h2>
+            
+            <div class="gallery-container">
+                <div class="slides-wrapper" id="gallery-slides-container"></div>
+                <div class="gallery-controls">
+                    <button class="gallery-btn" onclick="prevSlide()" aria-label="Previous image">‹</button>
+                    <button class="gallery-btn" onclick="nextSlide()" aria-label="Next image">›</button>
+                </div>
+                <div class="gallery-indicators" id="gallery-dots-container"></div>
+            </div>
+            <div style="margin-top: 25px;">
+                <button class="btn-premium" onclick="nextScene()">Take The Birthday Quiz 🧠</button>
+            </div>
+        </section>
+
+        <!-- SCENE 6 — FRIENDSHIP QUIZ -->
+        <section id="scene-6" class="scene">
+            <div class="glass-card" style="max-width: 650px;">
+                <h1 class="cinematic-title" style="font-size: 2.5rem;">Birthday <span class="glow-gold">Quiz</span></h1>
+                <h2 class="section-subtitle" style="margin-bottom: 15px; font-size: 1.1rem;" id="quiz-question-counter">Question 1 of 5</h2>
+                
+                <div class="quiz-question-box">
+                    <div class="quiz-question-title" id="quiz-question-text">Who spends more money?</div>
+                    <div class="quiz-options-list" id="quiz-options-container"></div>
+                </div>
+
+                <div class="quiz-feedback" id="quiz-feedback">Correct 😂</div>
+
+                <div id="quiz-next-btn-box" style="display:none;">
+                    <button class="btn-premium btn-gold" id="quiz-action-btn" onclick="advanceQuiz()">Next Question ❯</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCENE 7 — RAPID FIRE ROUND -->
+        <section id="scene-7" class="scene">
+            <h1 class="cinematic-title" style="font-size: 2.8rem;">Rapid Fire <span class="glow-gold">Duel</span></h1>
+            <h2 class="section-subtitle" style="margin-bottom: 30px;">Quick choices! Click the ones that match us best!</h2>
+            
+            <div class="rapid-fire-card">
+                <div style="font-size: 1.5rem; color: var(--color-blue); font-weight:600;" id="rapid-round-title">ROUND 1</div>
+                <div class="rapid-fire-duel">
+                    <div class="rapid-option" id="rapid-opt-left" onclick="selectRapidOption('left')">Tea</div>
+                    <div class="rapid-vs">VS</div>
+                    <div class="rapid-option" id="rapid-opt-right" onclick="selectRapidOption('right')">Coffee</div>
+                </div>
+                <div id="rapid-timer-bar" style="width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow:hidden; position:relative;">
+                    <div id="rapid-timer-fill" style="width: 100%; height: 100%; background: var(--color-blue); position:absolute; left:0; top:0;"></div>
+                </div>
+            </div>
+            <div style="margin-top: 30px;">
+                <button class="btn-premium" onclick="nextScene()">Show Friendship Awards 🏆</button>
+            </div>
+        </section>
+
+        <!-- SCENE 8 — FRIENDSHIP AWARDS -->
+        <section id="scene-8" class="scene">
+            <h1 class="cinematic-title" style="font-size: 2.8rem;">Birthday <span class="glow-gold">Awards</span></h1>
+            <h2 class="section-subtitle" style="margin-bottom: 30px;">Officially designated achievements and honorary titles for Swathi</h2>
+            
+            <div class="awards-grid" id="awards-container"></div>
+            
+            <div>
+                <button class="btn-premium btn-gold" id="btn-awards-next" style="display: none;" onclick="nextScene()">Unlock Message From Heart ❤️</button>
+            </div>
+        </section>
+
+        <!-- SCENE 9 — MESSAGE FROM HEART -->
+        <section id="scene-9" class="scene">
+            <h1 class="cinematic-title" style="font-size: 2.8rem;">A Message <span class="glow-gold">From The Heart</span></h1>
+            <h2 class="section-subtitle" style="margin-bottom: 25px;">A special letter for the birthday girl</h2>
+            
+            <div class="message-container">
+                <div class="message-typewriter" id="typewriter-message"></div>
+            </div>
+            
+            <div style="margin-top: 25px;">
+                <button class="btn-premium" id="btn-message-next" style="display: none;" onclick="nextScene()">View Friendship Stats 📊</button>
+            </div>
+        </section>
+
+        <!-- SCENE 10 — FRIENDSHIP STATISTICS -->
+        <section id="scene-10" class="scene">
+            <h1 class="cinematic-title" style="font-size: 2.8rem;">Friendship <span class="glow-gold">Stats</span></h1>
+            <h2 class="section-subtitle" style="margin-bottom: 30px;">Our legacy in analytical numbers</h2>
+            
+            <div class="stats-grid" id="stats-container"></div>
+            
+            <div>
+                <button class="btn-premium btn-gold" onclick="nextScene()">Proceed to Finale 💫</button>
+            </div>
+        </section>
+
+        <!-- SCENE 11 — FINAL CELEBRATION -->
+        <section id="scene-11" class="scene">
+            <canvas id="canvas-fireworks"></canvas>
+            
+            <div class="final-card-wrapper">
+                <div class="glass-card" style="text-align: center; max-width: 600px; padding: 50px 30px;">
+                    <div style="font-size: 4.5rem; margin-bottom: 15px; animation: bounceUnlock 2s infinite ease-in-out;">🎁🎂🎉</div>
+                    <h1 class="cinematic-title" style="font-size: 3.2rem;"><span class="glow-gold">HAPPY BIRTHDAY SWATHI! 🎉</span></h1>
+                    <h2 class="section-subtitle" style="font-size: 1.3rem; margin-bottom: 30px; color: var(--text-white);">Some Friends Become Family ❤️</h2>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 15px; align-items: center;">
+                        <button class="btn-premium btn-gold" style="font-size: 1.1rem; padding: 18px 45px;" onclick="triggerMassiveFireworks()">Celebrate Swathi Forever 🤝</button>
+                        <button class="btn-premium" style="opacity: 0.7; font-size: 0.85rem;" onclick="restartJourney()">Restart Journey ↺</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JavaScript logic source -->
+    <script src="app.js"></script>
+</body>
+</html>
